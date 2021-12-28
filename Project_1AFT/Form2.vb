@@ -11,7 +11,7 @@ Public Class Form2
 
     End Sub
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        TextBox1.MaxLength = 12
         DateTimePicker1.MinDate = Date.Now.Date
 
         DateTimePicker1.MaxDate = Date.Now.AddDays(30)
@@ -19,6 +19,7 @@ Public Class Form2
         GroupBox1.Hide()
         GroupBox2.Hide()
 
+        ComboBox3.Text = "0"
         ComboBox1.Text = "Select Room Type"
         With ComboBox1.Items
             .Add("Standard")
@@ -139,7 +140,7 @@ Public Class Form2
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
         If TextBox1.Text IsNot "" Then
             Dim con As New SqlConnection(DBconfig)
-            Dim command As New SqlCommand("Select * from aft_customer where cid=" + TextBox1.Text + "", con)
+            Dim command As New SqlCommand("Select * from aft_customer where icnumber=" + TextBox1.Text + "", con)
             Dim sda As New SqlDataAdapter(command)
             Dim dt As New DataTable()
 
@@ -181,7 +182,16 @@ Public Class Form2
             Dim DaysStayed As Int32 = departuredate.Subtract(arrivaldate).Days
             DaysStayed += 1
             Dim EachPrice As Int32 = Label2.Text
+            Dim AddPersion As Int32 = ComboBox3.Text
             Dim total As Int32 = EachPrice * DaysStayed
+
+            If AddPersion = 0 Then
+                total = EachPrice * DaysStayed
+            ElseIf AddPersion = 1 Then
+                total = EachPrice + EachPrice * DaysStayed
+            Else
+                total = EachPrice + EachPrice * AddPersion * DaysStayed
+            End If
 
             Label13.Text = DaysStayed.ToString()
             Label11.Text = total.ToString()
@@ -199,7 +209,37 @@ Public Class Form2
         Dim DaysStayed As Int32 = departuredate.Subtract(arrivaldate).Days
         DaysStayed += 1
         Dim EachPrice As Int32 = Label2.Text
+        Dim AddPersion As Int32 = ComboBox3.Text
         Dim total As Int32 = EachPrice * DaysStayed
+
+        If AddPersion = 0 Then
+            total = EachPrice * DaysStayed
+        ElseIf AddPersion = 1 Then
+            total = EachPrice + EachPrice * DaysStayed
+        Else
+            total = EachPrice + EachPrice * AddPersion * DaysStayed
+        End If
+
+        Label13.Text = DaysStayed.ToString()
+        Label11.Text = total.ToString()
+    End Sub
+
+    Private Sub ComboBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
+        Dim arrivaldate As Date = Date.Now
+        Dim departuredate As Date = Me.DateTimePicker1.Value
+        Dim DaysStayed As Int32 = departuredate.Subtract(arrivaldate).Days
+        DaysStayed += 1
+        Dim EachPrice As Int32 = Label2.Text
+        Dim AddPersion As Int32 = ComboBox3.Text
+        Dim total As Int32 = EachPrice * DaysStayed
+
+        If AddPersion = 0 Then
+            total = EachPrice * DaysStayed
+        ElseIf AddPersion = 1 Then
+            total = EachPrice + EachPrice * DaysStayed
+        Else
+            total = EachPrice + EachPrice * AddPersion * DaysStayed
+        End If
 
         Label13.Text = DaysStayed.ToString()
         Label11.Text = total.ToString()

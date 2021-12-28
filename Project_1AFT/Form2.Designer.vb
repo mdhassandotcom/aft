@@ -52,6 +52,8 @@ Partial Class Form2
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -75,7 +77,7 @@ Partial Class Form2
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(10, 95)
+        Me.Label9.Location = New System.Drawing.Point(10, 126)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(162, 20)
         Me.Label9.TabIndex = 5
@@ -158,6 +160,8 @@ Partial Class Form2
         'GroupBox2
         '
         Me.GroupBox2.BackColor = System.Drawing.Color.Transparent
+        Me.GroupBox2.Controls.Add(Me.ComboBox3)
+        Me.GroupBox2.Controls.Add(Me.Label15)
         Me.GroupBox2.Controls.Add(Me.Label13)
         Me.GroupBox2.Controls.Add(Me.Label12)
         Me.GroupBox2.Controls.Add(Me.Label11)
@@ -195,7 +199,7 @@ Partial Class Form2
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(185, 95)
+        Me.Label11.Location = New System.Drawing.Point(185, 126)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(0, 20)
         Me.Label11.TabIndex = 17
@@ -327,6 +331,24 @@ Partial Class Form2
         Me.Label14.Size = New System.Drawing.Size(0, 20)
         Me.Label14.TabIndex = 20
         '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(11, 96)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(126, 20)
+        Me.Label15.TabIndex = 20
+        Me.Label15.Text = "Add On Person : "
+        '
+        'ComboBox3
+        '
+        Me.ComboBox3.FormattingEnabled = True
+        Me.ComboBox3.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"})
+        Me.ComboBox3.Location = New System.Drawing.Point(149, 93)
+        Me.ComboBox3.Name = "ComboBox3"
+        Me.ComboBox3.Size = New System.Drawing.Size(62, 28)
+        Me.ComboBox3.TabIndex = 21
+        '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -383,4 +405,6 @@ Partial Class Form2
     Friend WithEvents Label13 As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents Label14 As Label
+    Friend WithEvents ComboBox3 As ComboBox
+    Friend WithEvents Label15 As Label
 End Class

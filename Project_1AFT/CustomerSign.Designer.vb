@@ -118,8 +118,7 @@ Partial Class CustomerSign
         '
         Me.TextBox2.Location = New System.Drawing.Point(160, 92)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.PlaceholderText = "IC number will assign automatically"
-        Me.TextBox2.ReadOnly = True
+        Me.TextBox2.PlaceholderText = "Type Your IC Number"
         Me.TextBox2.Size = New System.Drawing.Size(250, 27)
         Me.TextBox2.TabIndex = 6
         '

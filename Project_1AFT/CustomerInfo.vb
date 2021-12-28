@@ -12,6 +12,7 @@ Public Class CustomerInfo
     Private Sub CustomerInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GroupBox2.Hide()
         GroupBox3.Hide()
+        TextBox1.MaxLength = 12
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Me.Hide()
@@ -22,7 +23,7 @@ Public Class CustomerInfo
 
         If TextBox1.Text IsNot "" Then
             Dim con As New SqlConnection(DBconfig)
-            Dim command As New SqlCommand("Select * from aft_customer where cid=" + TextBox1.Text + "", con)
+            Dim command As New SqlCommand("Select * from aft_customer where icnumber=" + TextBox1.Text + "", con)
             Dim sda As New SqlDataAdapter(command)
             Dim dt As New DataTable()
 
@@ -70,7 +71,7 @@ Public Class CustomerInfo
             ,[cemail] = '" + TextBox3.Text + "'
             ,[cphone] = '" + TextBox4.Text + "'
             ,[caddress] = '" + TextBox5.Text + "'
-            WHERE cid=" + TextBox1.Text + "", con)
+            WHERE icnumber=" + TextBox1.Text + "", con)
             con.Open()
             command.ExecuteNonQuery()
             MessageBox.Show("Customer Info Updated")
@@ -86,7 +87,7 @@ Public Class CustomerInfo
         Try
             Dim con As New SqlConnection(DBconfig)
             Dim command As New SqlCommand("DELETE FROM aft_customer
-            WHERE cid=" + TextBox1.Text + "", con)
+            WHERE icnumber=" + TextBox1.Text + "", con)
             con.Open()
             command.ExecuteNonQuery()
             MessageBox.Show("Customer Info Deleted")

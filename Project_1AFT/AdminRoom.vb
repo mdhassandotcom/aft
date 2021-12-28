@@ -28,8 +28,25 @@ Public Class AdminRoom
             .Add("Deluxe")
         End With
 
+        If ComboBox2.Text Is "" Then
+            Dim con As New SqlConnection(DBconfig)
+            Dim command As New SqlCommand("Select * from aft_room", con)
+            Dim sda As New SqlDataAdapter(command)
+            Dim dt As New DataTable()
+
+            sda.Fill(dt)
+            Dim temp As Integer = 0
+            While temp < dt.Rows.Count
+                ComboBox2.Items.Add(dt.Rows(temp)("roomnumber").ToString())
+                temp += 1
+            End While
+            con.Close()
+        Else
+            MessageBox.Show("Please Enter Room Number.")
+        End If
+
     End Sub
-    Private Sub TextBox1_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox1.KeyPress
+    Private Sub TextBox1_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
         If Not Char.IsDigit(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
@@ -52,9 +69,9 @@ Public Class AdminRoom
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Button7.Hide()
         Button8.Hide()
-        If TextBox1.Text IsNot "" Then
+        If ComboBox2.Text IsNot "" Then
             Dim con As New SqlConnection(DBconfig)
-            Dim command As New SqlCommand("Select * from aft_room where roomnumber=" + TextBox1.Text + "", con)
+            Dim command As New SqlCommand("Select * from aft_room where roomnumber=" + ComboBox2.Text + "", con)
             Dim sda As New SqlDataAdapter(command)
             Dim dt As New DataTable()
 
@@ -124,7 +141,6 @@ Public Class AdminRoom
         TextBox4.Show()
         TextBox5.Show()
 
-        TextBox1.Clear()
         TextBox3.Clear()
         TextBox4.Clear()
         TextBox5.Clear()
@@ -138,16 +154,15 @@ Public Class AdminRoom
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
-        If TextBox1.Text IsNot "" Then
+        If ComboBox2.Text IsNot "" Then
             Try
                 Dim con As New SqlConnection(DBconfig)
                 Dim command As New SqlCommand("DELETE FROM aft_room
-            WHERE roomnumber=" + TextBox1.Text + "", con)
+            WHERE roomnumber=" + ComboBox2.Text + "", con)
                 con.Open()
                 command.ExecuteNonQuery()
                 MessageBox.Show("Room Deleted")
                 con.Close()
-                TextBox1.Text = ""
                 Label2.Hide()
                 Label3.Hide()
                 Label4.Hide()
@@ -160,6 +175,7 @@ Public Class AdminRoom
 
                 Button7.Hide()
                 Button8.Hide()
+                ComboBox2.Items.Remove(ComboBox2.SelectedItem)
             Catch ex As Exception
                 MessageBox.Show("Exception: {0}", ex.Message)
                 MessageBox.Show("We found an error, Please contact with super admin.")
@@ -172,7 +188,7 @@ Public Class AdminRoom
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Button7.Hide()
         Button2.PerformClick()
-        If TextBox1.Text IsNot "" Then
+        If ComboBox2.Text IsNot "" Then
             Button8.Show()
         End If
         ComboBox1.Enabled = True
@@ -207,6 +223,7 @@ Public Class AdminRoom
             con.Open()
             command.ExecuteNonQuery()
             MessageBox.Show("New Room Added")
+            ComboBox2.Items.Add(TextBox4.Text)
             con.Close()
 
         Catch ex As Exception
@@ -226,7 +243,7 @@ Public Class AdminRoom
         TextBox4.Show()
         TextBox5.Show()
 
-        If TextBox1.Text IsNot "" Then
+        If ComboBox2.Text IsNot "" Then
             Try
                 Dim con As New SqlConnection(DBconfig)
                 Dim command As New SqlCommand("Update aft_room
@@ -234,7 +251,7 @@ Public Class AdminRoom
             ,[roomprice] = " + TextBox3.Text + "
             ,[roomnumber] = " + TextBox4.Text + "
             ,[roomsize] = " + TextBox5.Text + "
-            WHERE roomnumber=" + TextBox1.Text + "", con)
+            WHERE roomnumber=" + ComboBox2.Text + "", con)
                 con.Open()
                 command.ExecuteNonQuery()
                 MessageBox.Show("Room Details Updated")

@@ -24,7 +24,6 @@ Partial Class AdminRoom
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -40,13 +39,14 @@ Partial Class AdminRoom
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.ComboBox2)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.TextBox1)
         Me.GroupBox1.Controls.Add(Me.Button5)
         Me.GroupBox1.Controls.Add(Me.Button4)
         Me.GroupBox1.Controls.Add(Me.Button3)
@@ -66,13 +66,6 @@ Partial Class AdminRoom
         Me.Label1.Size = New System.Drawing.Size(118, 20)
         Me.Label1.TabIndex = 6
         Me.Label1.Text = "Room Number : "
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(257, 38)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(202, 27)
-        Me.TextBox1.TabIndex = 5
         '
         'Button5
         '
@@ -202,6 +195,14 @@ Partial Class AdminRoom
         Me.ComboBox1.Size = New System.Drawing.Size(272, 28)
         Me.ComboBox1.TabIndex = 13
         '
+        'ComboBox2
+        '
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Location = New System.Drawing.Point(255, 38)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(157, 28)
+        Me.ComboBox2.TabIndex = 7
+        '
         'AdminRoom
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 20.0!)
@@ -231,7 +232,6 @@ Partial Class AdminRoom
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents Button1 As Button
     Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Button5 As Button
     Friend WithEvents Button4 As Button
     Friend WithEvents Button3 As Button
@@ -246,4 +246,5 @@ Partial Class AdminRoom
     Friend WithEvents Button7 As Button
     Friend WithEvents Button8 As Button
     Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents ComboBox2 As ComboBox
 End Class
