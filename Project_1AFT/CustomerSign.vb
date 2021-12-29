@@ -2,6 +2,15 @@
 Imports System.Data.SqlClient
 Imports System.Text.RegularExpressions
 Public Class CustomerSign
+
+    Public ValCheck As Integer = 0
+    Private Sub ValidationCheck()
+        If TextBox1.Text Is "" Or TextBox2.Text Is "" Or TextBox3.Text Is "" Or TextBox4.Text Is "" Or TextBox5.Text Is "" Then
+            ValCheck = 1
+        Else
+            ValCheck = 0
+        End If
+    End Sub
     Private Sub TextBox4_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox4.KeyPress
 
         If Not Char.IsDigit(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
@@ -32,9 +41,10 @@ Public Class CustomerSign
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        ValidationCheck()
         Dim regex As Regex = New Regex("^[^@\s]+@[^@\s]+\.[^@\s]+$")
         Dim isValid As Boolean = regex.IsMatch(TextBox3.Text.Trim)
-        If isValid And Len(TextBox2.Text) = 12 Then
+        If isValid And Len(TextBox2.Text) = 12 And ValCheck = 0 Then
             Try
                 Dim con As New SqlConnection(DBconfig)
                 Dim command As New SqlCommand("INSERT INTO aft_customer
@@ -64,6 +74,8 @@ Public Class CustomerSign
             End Try
         ElseIf Len(TextBox2.Text) < 12 Then
             MessageBox.Show("Please Enter Exactly 12 Digit Number.")
+        ElseIf ValCheck = 1 Then
+            MessageBox.Show("No missing field is allowed. All are required.")
         Else
             MessageBox.Show("Please Enter a Valid Email Address.")
         End If

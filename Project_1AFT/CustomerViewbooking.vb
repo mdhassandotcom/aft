@@ -27,6 +27,7 @@ Public Class CustomerViewbooking
         Label12.Hide()
         Label13.Hide()
         Button3.Hide()
+        Button4.Hide()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -38,6 +39,7 @@ Public Class CustomerViewbooking
 
             sda.Fill(dt)
             If (dt.Rows.Count > 0) Then
+                Button4.Show()
                 Button3.Show()
                 Label2.Show()
                 Label3.Show()
@@ -71,10 +73,12 @@ Public Class CustomerViewbooking
                 Label12.Hide()
                 Label13.Hide()
                 Button3.Hide()
+                Button4.Hide()
                 MessageBox.Show("No Booking Found.")
             End If
             con.Close()
         Else
+            Button4.Hide()
             Button3.Hide()
             Label2.Hide()
             Label3.Hide()
@@ -127,5 +131,39 @@ Public Class CustomerViewbooking
 
 
         e.Graphics.DrawString("THANK YOU FOR CHOSSING US. ENJOY YOUR STAY!! ", fontend, Brushes.LightPink, 150, 600)
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        If TextBox1.Text IsNot "" Then
+            Try
+                Dim con As New SqlConnection(DBconfig)
+                Dim command As New SqlCommand("DELETE FROM aft_booking
+            WHERE bid=" + TextBox1.Text + "", con)
+                con.Open()
+                command.ExecuteNonQuery()
+                MessageBox.Show("Booking Info Deleted")
+                con.Close()
+                TextBox1.Text = ""
+                Label2.Hide()
+                Label3.Hide()
+                Label4.Hide()
+                Label5.Hide()
+                Label6.Hide()
+                Label7.Hide()
+                Label8.Hide()
+                Label9.Hide()
+                Label10.Hide()
+                Label11.Hide()
+                Label12.Hide()
+                Label13.Hide()
+                Button3.Hide()
+                Button4.Hide()
+            Catch ex As Exception
+                MessageBox.Show("Exception: {0}", ex.Message)
+                MessageBox.Show("We found an error, Please contact with super admin.")
+            End Try
+        Else
+            MessageBox.Show("Booking Number is Missing")
+        End If
     End Sub
 End Class

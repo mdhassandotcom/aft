@@ -2,6 +2,14 @@
 Imports System.Data.SqlClient
 
 Public Class AdminRoom
+    Public ValCheck As Integer = 0
+    Private Sub ValidationCheck()
+        If ComboBox1.Text Is "" Or TextBox3.Text Is "" Or TextBox4.Text Is "" Or TextBox5.Text Is "" Then
+            ValCheck = 1
+        Else
+            ValCheck = 0
+        End If
+    End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Me.Hide()
         WelcomeAdmin.Show()
@@ -207,29 +215,35 @@ Public Class AdminRoom
         TextBox3.Show()
         TextBox4.Show()
         TextBox5.Show()
-        Try
-            Dim con As New SqlConnection(DBconfig)
-            Dim command As New SqlCommand("INSERT INTO aft_room
+        ValidationCheck()
+        If ValCheck = 0 Then
+            Try
+                Dim con As New SqlConnection(DBconfig)
+                Dim command As New SqlCommand("INSERT INTO aft_room
            ([roomtype]
            ,[roomprice]
            ,[roomnumber]
            ,[roomsize])
-     VALUES
+            VALUES
            ('" + ComboBox1.Text + "',
            " + TextBox3.Text + ",
            " + TextBox4.Text + ",
            " + TextBox5.Text + ")", con)
 
-            con.Open()
-            command.ExecuteNonQuery()
-            MessageBox.Show("New Room Added")
-            ComboBox2.Items.Add(TextBox4.Text)
-            con.Close()
+                con.Open()
+                command.ExecuteNonQuery()
+                MessageBox.Show("New Room Added")
+                ComboBox2.Items.Add(TextBox4.Text)
+                con.Close()
 
-        Catch ex As Exception
-            MessageBox.Show("Exception: {0}", ex.Message)
-            MessageBox.Show("We found an error, Please contact with super admin.")
-        End Try
+            Catch ex As Exception
+                MessageBox.Show("Exception: {0}", ex.Message)
+                MessageBox.Show("We found an error, Please contact with super admin.")
+            End Try
+
+        Else
+            MessageBox.Show("No Missing Field is Allowed. All are required.")
+        End If
     End Sub
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
@@ -242,8 +256,8 @@ Public Class AdminRoom
         TextBox3.Show()
         TextBox4.Show()
         TextBox5.Show()
-
-        If ComboBox2.Text IsNot "" Then
+        ValidationCheck()
+        If ComboBox2.Text IsNot "" And ValCheck = 0 Then
             Try
                 Dim con As New SqlConnection(DBconfig)
                 Dim command As New SqlCommand("Update aft_room
@@ -260,6 +274,8 @@ Public Class AdminRoom
                 MessageBox.Show("Exception: {0}", ex.Message)
                 MessageBox.Show("We found an error, Please contact with super admin.")
             End Try
+        ElseIf ValCheck = 1 Then
+            MessageBox.Show("No Missing Field is Allowed. All are required.")
         Else
             MessageBox.Show("Please Enter Room Number.")
         End If

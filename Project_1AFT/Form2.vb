@@ -190,7 +190,7 @@ Public Class Form2
             ElseIf AddPersion = 1 Then
                 total = EachPrice + EachPrice * DaysStayed
             Else
-                total = EachPrice + EachPrice * AddPersion * DaysStayed
+                total = EachPrice + EachPrice + EachPrice * AddPersion * DaysStayed
             End If
 
             Label13.Text = DaysStayed.ToString()
@@ -215,9 +215,9 @@ Public Class Form2
         If AddPersion = 0 Then
             total = EachPrice * DaysStayed
         ElseIf AddPersion = 1 Then
-            total = EachPrice + EachPrice * DaysStayed
+            total = EachPrice * DaysStayed
         Else
-            total = EachPrice + EachPrice * AddPersion * DaysStayed
+            total = EachPrice + EachPrice + EachPrice * AddPersion * DaysStayed
         End If
 
         Label13.Text = DaysStayed.ToString()

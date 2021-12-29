@@ -43,6 +43,7 @@ Partial Class CustomerViewbooking
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -94,7 +95,8 @@ Partial Class CustomerViewbooking
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(366, 409)
+        Me.Button3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
+        Me.Button3.Location = New System.Drawing.Point(260, 389)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(94, 29)
         Me.Button3.TabIndex = 3
@@ -223,11 +225,21 @@ Partial Class CustomerViewbooking
         Me.Label13.TabIndex = 15
         Me.Label13.Text = "Label13"
         '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(380, 389)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(130, 29)
+        Me.Button4.TabIndex = 16
+        Me.Button4.Text = "Delete Booking"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
         'CustomerViewbooking
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.Label11)
@@ -272,4 +284,5 @@ Partial Class CustomerViewbooking
     Friend WithEvents Label11 As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents Label13 As Label
+    Friend WithEvents Button4 As Button
 End Class
